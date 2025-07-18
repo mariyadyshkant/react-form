@@ -1,10 +1,12 @@
-// import { useState } from 'react'
+import { useState } from 'react'
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Button } from 'bootstrap';
 
-function App() {
+export default function App() {
+
+  const [newArticle, setNewArticle] = useState('');
   const articles = [
     {
       id: '1',
@@ -32,23 +34,32 @@ function App() {
       content: 'State management is crucial in React applications, and there are various libraries like Redux and Context API to help with this.'
     }
   ]
+  const [articlesList, setArticlesList] = useState(articles);
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setArticlesList([...articlesList, newArticle]);
+  }
+
 
   return (
+
     <>
       <div className='container'>
         <h1 className='text-white text-center py-3 rounded-2'>React Blog Form</h1>
-        {articles.map(article => (
-          <div key={article.id}>
-            <ul className='list-group'>
+        <ul className='list-group'>
+          {articles.map(article => (
+            <div key={article.id}>
               <li className='list-group-item list-group-item'>
                 {article.title}
+                <button className='btn btn-light btn-trash'><i className="bi bi-trash"></i>
+                </button>
               </li>
-              <button id='btn-trash' className='btn btn-light'><i className="bi bi-trash"></i></button>
-            </ul>
-          </div>
-        ))}
-        <form action="" className='d-flex'>
-          <input id='input' type="text" placeholder="New article" className='form-control bg-light py-2' />
+            </div>
+          ))}
+        </ul>
+
+        <form onSubmit={handleSubmit} className='d-flex'>
+          <input id='input' value={newArticle} onChange={e => setNewArticle(e.target.value)} type="text" placeholder="New article" className='form-control bg-light py-2' />
           <button id='btn-add' type="submit" className='btn btn-success'><span className='btn-text'>Add </span><i className="bi bi-plus-square fw-bold"></i>
           </button>
         </form>
@@ -56,5 +67,3 @@ function App() {
     </>
   )
 }
-
-export default App
