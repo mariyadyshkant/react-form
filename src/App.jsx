@@ -2,6 +2,7 @@
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { Button } from 'bootstrap';
 
 function App() {
   const articles = [
@@ -35,13 +36,14 @@ function App() {
   return (
     <>
       <div className='container'>
-        <h1 className='bg-body-secondary text-center py-3 rounded-2'>React Blog Form</h1>
+        <h1 className='text-white text-center py-3 rounded-2'>React Blog Form</h1>
         {articles.map(article => (
           <div key={article.id}>
             <ul className='list-group'>
-              <li className='list-group-item list-group-item-primary'>
+              <li className='list-group-item list-group-item'>
                 {article.title}
               </li>
+              <button id='btn-trash' className='btn btn-light'><i className="bi bi-trash"></i></button>
             </ul>
           </div>
         ))}

@@ -13,6 +13,31 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1 {
+  background-color: #2b34d7;
+}
+
+ul {
+  position: relative;
+}
+
+li:hover {
+  background-color: #3469f09b;
+}
+
+#btn-trash {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+#btn-trash:hover {
+  color: #ff4d4d;
+}
+
 form {
   position: relative;
 
