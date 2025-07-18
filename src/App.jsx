@@ -35,12 +35,16 @@ function App() {
   return (
     <>
       <div className='container'>
-        <h1 className='bg-body-secondary text-center py-3'>React Blog Form</h1>
-        <ul className='list-group'>
-          <li className='list-group-item list-group-item-primary'>
-            Article
-          </li>
-        </ul>
+        <h1 className='bg-body-secondary text-center py-3 rounded-2'>React Blog Form</h1>
+        {articles.map(article => (
+          <div key={article.id}>
+            <ul className='list-group'>
+              <li className='list-group-item list-group-item-primary'>
+                {article.title}
+              </li>
+            </ul>
+          </div>
+        ))}
         <form action="" className='d-flex'>
           <input id='input' type="text" placeholder="New article" className='form-control bg-light py-2' />
           <button id='btn-add' type="submit" className='btn btn-success'><span className='btn-text'>Add </span><i className="bi bi-plus-square fw-bold"></i>
