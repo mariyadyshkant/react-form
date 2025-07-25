@@ -2,11 +2,9 @@ import { useState } from 'react'
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { Button } from 'bootstrap';
 
 export default function App() {
 
-  const [newArticle, setNewArticle] = useState('');
   const articles = [
     {
       id: '1',
@@ -35,11 +33,25 @@ export default function App() {
     }
   ]
   const [articlesList, setArticlesList] = useState(articles);
+  const [newArticle, setNewArticle] = useState('');
+
   const handleSubmit = (e) => {
-    e.preventDefault()
-    setArticlesList([...articlesList, newArticle]);
+    e.preventDefault();
+
+    const newObject = {
+      id: (articlesList.length + 1).toString(),
+      title: newArticle,
+      content: 'This is a new article content.'
+    };
+
+    setArticlesList([...articlesList, newObject]);
+    setNewArticle('');
   }
 
+  const handleDelete = (id) => {
+    const updatedList = articlesList.filter(article => article.id !== id);
+    setArticlesList(updatedList);
+  }
 
   return (
 
@@ -47,11 +59,15 @@ export default function App() {
       <div className='container'>
         <h1 className='text-white text-center py-3 rounded-2'>React Blog Form</h1>
         <ul className='list-group'>
-          {articles.map(article => (
+          {articlesList.map(article => (
             <div key={article.id}>
               <li className='list-group-item list-group-item'>
                 {article.title}
-                <button className='btn btn-light btn-trash'><i className="bi bi-trash"></i>
+                <button
+                  className='btn btn-outline-danger btn-trash'
+                  onClick={() => handleDelete(article.id)}
+                >
+                  <i className="bi bi-trash"></i>
                 </button>
               </li>
             </div>
@@ -59,8 +75,20 @@ export default function App() {
         </ul>
 
         <form onSubmit={handleSubmit} className='d-flex'>
-          <input id='input' value={newArticle} onChange={e => setNewArticle(e.target.value)} type="text" placeholder="New article" className='form-control bg-light py-2' />
-          <button id='btn-add' type="submit" className='btn btn-success'><span className='btn-text'>Add </span><i className="bi bi-plus-square fw-bold"></i>
+          <input
+            id='input'
+            value={newArticle}
+            onChange={e => setNewArticle(e.target.value)}
+            type="text"
+            placeholder="New article"
+            className='form-control bg-light py-2' />
+          <button
+            id='btn-add'
+            type="submit"
+            className='btn btn-success'
+
+          >
+            <span className='btn-text'>Add </span><i className="bi bi-plus-square fw-bold"></i>
           </button>
         </form>
       </div>
